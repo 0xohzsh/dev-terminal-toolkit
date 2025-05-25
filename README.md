@@ -24,7 +24,7 @@ Transform your **Debian/Ubuntu/macOS** terminal into a powerful Node.js developm
 ## ✨ Quick Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/your-username/zsh-setup/main/ohzsh.sh | bash
+curl -fsSL https://raw.githubusercontent.com/0xohzsh/dev-terminal-toolkit/main/ohzsh.sh | bash
 ```
 
 ## 🎯 What You Get
