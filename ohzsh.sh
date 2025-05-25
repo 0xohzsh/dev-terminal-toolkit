@@ -17,8 +17,8 @@ NC='\033[0m' # No Color
 # Banner function with ASCII art
 show_banner() {
     echo -e "${CYAN}"
-    echo "╔══════════════════════════════════════════════════════════════════════════════╗"
-    echo "║                                                                              ║"
+    echo "╔═════════════════════════════════════════════════════════════════════════════╗"
+    echo "║                                                                             ║"
     echo "║    ██████╗ ██╗  ██╗ ██████╗ ██╗  ██╗███████╗███████╗██╗  ██╗                ║"
     echo "║   ██╔═████╗╚██╗██╔╝██╔═══██╗██║  ██║╚══███╔╝██╔════╝██║  ██║                ║"
     echo "║   ██║██╔██║ ╚███╔╝ ██║   ██║███████║  ███╔╝ ███████╗███████║                ║"
@@ -28,7 +28,7 @@ show_banner() {
     echo "║                                                                             ║"
     echo -e "║                    ${MAGENTA}🚀 One-Click Terminal Transformation 🚀${CYAN}                  ║"
     echo "║                                                                             ║"
-    echo -e "║                     ${YELLOW}Follow us: https://x.com/0xohzsh${CYAN}                       ║"
+    echo -e "║                     ${YELLOW}Follow us: https://x.com/0xohzsh${CYAN}                        ║"
     echo "║                                                                             ║"
     echo "║              Transform your terminal into a powerful dev environment        ║"
     echo "║                   with Oh My Zsh + Node.js + Beautiful Themes               ║"
