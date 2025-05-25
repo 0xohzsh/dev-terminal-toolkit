@@ -55,8 +55,6 @@ print_header() {
     echo -e "${BLUE}================================${NC}"
     echo -e "${BLUE}$1${NC}"
     echo -e "${BLUE}================================${NC}"
-    clear
-    show_banner
 }
 
 # Detect operating system
@@ -71,6 +69,12 @@ detect_os() {
 }
 
 OS=$(detect_os)
+
+# Clear screen for clean output
+clear
+
+# Show the banner
+show_banner
 
 # Check if running on supported system
 if [[ "$OS" == "unknown" ]]; then
@@ -154,8 +158,10 @@ if [ ! -d "$ZSH_CUSTOM/plugins/zsh-history-substring-search" ]; then
     git clone https://github.com/zsh-users/zsh-history-substring-search "$ZSH_CUSTOM/plugins/zsh-history-substring-search"
 fi
 
-# you-should-use (already included in Oh My Zsh)
-# This plugin reminds you to use aliases
+# you-should-use (reminds you to use aliases)
+if [ ! -d "$ZSH_CUSTOM/plugins/you-should-use" ]; then
+    git clone https://github.com/MichaelAquilina/zsh-you-should-use.git "$ZSH_CUSTOM/plugins/you-should-use"
+fi
 
 # Install Powerlevel10k theme
 print_status "Installing Powerlevel10k theme..."
@@ -239,6 +245,9 @@ source $ZSH/oh-my-zsh.sh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add npm global packages to PATH (for macOS permission fix)
+export PATH="$HOME/.npm-global/bin:$PATH"
 
 # Auto-load .nvmrc files
 autoload -U add-zsh-hook
@@ -360,19 +369,38 @@ print_status "Installing useful global npm packages..."
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 if command -v npm &> /dev/null; then
-    npm install -g \
-        nodemon \
-        pm2 \
-        http-server \
-        live-server \
-        create-react-app \
-        @vue/cli \
-        @angular/cli \
-        typescript \
-        ts-node \
-        eslint \
-        prettier \
-        jest
+    # Clear npm cache to avoid permission issues
+    print_status "Clearing npm cache..."
+    npm cache clean --force 2>/dev/null || true
+
+    # Fix npm permissions on macOS
+    if [[ "$OS" == "macos" ]]; then
+        print_status "Fixing npm permissions..."
+        mkdir -p ~/.npm-global
+        npm config set prefix '~/.npm-global'
+        export PATH=~/.npm-global/bin:$PATH
+    fi
+
+    # Install packages one by one to handle errors gracefully
+    packages=(
+        "nodemon"
+        "pm2"
+        "http-server"
+        "live-server"
+        "create-react-app"
+        "@vue/cli"
+        "@angular/cli"
+        "typescript"
+        "ts-node"
+        "eslint"
+        "prettier"
+        "jest"
+    )
+
+    for package in "${packages[@]}"; do
+        print_status "Installing $package..."
+        npm install -g "$package" 2>/dev/null || print_warning "Failed to install $package, skipping..."
+    done
 fi
 
 # Create a basic Powerlevel10k configuration
