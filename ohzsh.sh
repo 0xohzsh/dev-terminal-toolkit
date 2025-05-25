@@ -25,15 +25,15 @@ show_banner() {
     echo "║   ████╔╝██║ ██╔██╗ ██║   ██║██╔══██║ ███╔╝  ╚════██║██╔══██║                ║"
     echo "║   ╚██████╔╝██╔╝ ██╗╚██████╔╝██║  ██║███████╗███████║██║  ██║                ║"
     echo "║    ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝                ║"
-    echo "║                                                                              ║"
-    echo -e "║                    ${MAGENTA}🚀 One-Click Terminal Transformation 🚀${CYAN}                   ║"
-    echo "║                                                                              ║"
-    echo -e "║                     ${YELLOW}Follow us: https://x.com/0xohzsh${CYAN}                      ║"
-    echo "║                                                                              ║"
+    echo "║                                                                             ║"
+    echo -e "║                    ${MAGENTA}🚀 One-Click Terminal Transformation 🚀${CYAN}                  ║"
+    echo "║                                                                             ║"
+    echo -e "║                     ${YELLOW}Follow us: https://x.com/0xohzsh${CYAN}                       ║"
+    echo "║                                                                             ║"
     echo "║              Transform your terminal into a powerful dev environment        ║"
-    echo "║                   with Oh My Zsh + Node.js + Beautiful Themes              ║"
-    echo "║                                                                              ║"
-    echo "╚══════════════════════════════════════════════════════════════════════════════╝"
+    echo "║                   with Oh My Zsh + Node.js + Beautiful Themes               ║"
+    echo "║                                                                             ║"
+    echo "╚═════════════════════════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
     echo ""
 }
@@ -55,6 +55,8 @@ print_header() {
     echo -e "${BLUE}================================${NC}"
     echo -e "${BLUE}$1${NC}"
     echo -e "${BLUE}================================${NC}"
+    clear
+    show_banner
 }
 
 # Detect operating system
@@ -69,12 +71,6 @@ detect_os() {
 }
 
 OS=$(detect_os)
-
-# Clear screen for clean output
-clear
-
-# Show the banner
-show_banner
 
 # Check if running on supported system
 if [[ "$OS" == "unknown" ]]; then
