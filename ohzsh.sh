@@ -383,18 +383,10 @@ if command -v npm &> /dev/null; then
 
     # Install packages one by one to handle errors gracefully
     packages=(
-        "nodemon"
         "pm2"
         "http-server"
-        "live-server"
-        "create-react-app"
-        "@vue/cli"
-        "@angular/cli"
         "typescript"
-        "ts-node"
-        "eslint"
         "prettier"
-        "jest"
     )
 
     for package in "${packages[@]}"; do
