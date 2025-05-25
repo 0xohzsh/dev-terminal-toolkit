@@ -501,8 +501,14 @@ if [ "$SHELL" != "$(which zsh)" ]; then
             echo "$(which zsh)" | sudo tee -a /etc/shells
         fi
     fi
-    chsh -s $(which zsh)
-    print_warning "Shell changed to Zsh"
+
+    print_status "Changing default shell to Zsh (requires password)..."
+    if sudo chsh -s $(which zsh) $USER; then
+        print_status "Shell successfully changed to Zsh"
+    else
+        print_warning "Failed to change shell automatically. You can change it manually later with:"
+        print_warning "sudo chsh -s \$(which zsh) \$USER"
+    fi
 fi
 
 # Create useful development directories
