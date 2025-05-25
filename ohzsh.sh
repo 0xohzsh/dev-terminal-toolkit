@@ -70,6 +70,12 @@ detect_os() {
 
 OS=$(detect_os)
 
+# Clear screen for clean output
+clear
+
+# Show the banner
+show_banner
+
 # Check if running on supported system
 if [[ "$OS" == "unknown" ]]; then
     print_error "This script supports Debian/Ubuntu and macOS systems only"
